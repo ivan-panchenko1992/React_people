@@ -1,4 +1,4 @@
-export const swapiUrl = 'https://swapi.dev/api/';
+export const swapiUrl = '/swapi.dev/api/';
 
 const request = (url) => fetch(url)
   .then((response) => response.json())
