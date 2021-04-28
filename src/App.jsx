@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import 'bulma';
+import 'semantic-ui-css/semantic.min.css';
 import getPeople from './api/people';
 import './App.scss';
-import { PeopleList } from './components/peopleList/PeopleList';
+import { PeopleList } from './components/peopleList';
+import LoaderBall from './components/Loader/LoaderBall';
 
 const App = () => {
   const [people, setPeople] = useState([]);
@@ -24,12 +27,12 @@ const App = () => {
       <h2> people: </h2>
 
       {loading
-        ? <p>Loading ...</p>
+        ? <LoaderBall />
         : (
-          <div className="people-table">
-            <ul className="people-table__list">
+          <div className="App-table">
+            <ul className="App-table__list">
               {people.map((human) => (
-                <li className="people-table__item" key={human.id}>
+                <li className="App-table__item" key={human.id}>
                   <PeopleList name={human.name} birth={human.birth_year} id={human.id} />
                 </li>
               ))}

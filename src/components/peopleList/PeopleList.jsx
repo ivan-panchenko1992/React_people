@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, Fragment,
+  useState, useRef,
 } from 'react';
 import './PeopleList.scss';
 import PropTypes from 'prop-types';
@@ -38,45 +38,50 @@ export const PeopleList = ({ name, birth }) => {
 
   return (
     <section className="section">
-      <header
-        className="header"
+      <div
+        className="human-info"
       >
         <h3>{name}</h3>
         <p>
           Year:
           {birth}
         </p>
-      </header>
-      <main>
-        {comments && comments.map((comment) => (
-          <Fragment key={comment.id}>
-            <h3>Saved comment:</h3>
-            <p>{comment.title}</p>
-            <button
-              type="button"
-              onClick={() => removeHandler(comment.id)}
-            >
-              X
-            </button>
-          </Fragment>
-        ))}
-      </main>
-      <footer className="footer">
-        <form onSubmit={(event) => submitHandler(event)}>
+        <form
+          className="human-info__form"
+          onSubmit={(event) => submitHandler(event)}
+        >
           <button
             type="submit"
-            className="footer__button"
+            className="button is-small is-success"
           >
             Add Comment
           </button>
           <textarea
             placeholder="Write a comment"
             ref={commentRef}
-            className="footer__textarea"
+            className="human-info__textarea textarea is-small is-hovered"
             required
           />
         </form>
-      </footer>
+      </div>
+      <div className="comments">
+        <h4>Saved comments:</h4>
+        {comments && comments.map((comment) => (
+          <div
+            className="comments__item"
+            key={comment.id}
+          >
+            <p>{comment.title}</p>
+            <button
+              type="button"
+              className="comments__button"
+              onClick={() => removeHandler(comment.id)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

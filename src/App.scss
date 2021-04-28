@@ -1,6 +1,10 @@
 * {
   box-sizing: border-box;
 }
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
 
 body {
   margin: 0;
@@ -8,18 +12,24 @@ body {
 }
 
 .App {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  padding: 0px;
+  margin: 0;
+
   text-align: center;
 }
 
-.people-table {
-  margin: 0 auto;
-  width: 960px;
+.App-table {
+  width: 100%;
+  margin: 0;
 
   &__list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0;
+    
     list-style: none;
+  }
+  &__item {
+    margin: 0 5px 5px;
   }
 }
