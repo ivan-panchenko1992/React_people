@@ -12,13 +12,13 @@ export const PeopleList = ({ name, birth }) => {
   function submitHandler(event) {
     event.preventDefault();
 
-    const val = commentRef.current.value;
-    if (!val) {
+    const userComment = commentRef.current.value;
+    if (!userComment) {
       return;
     }
 
     const prepearedComment = {
-      title: val,
+      title: userComment,
       id: uuidv4(),
     };
     commentRef.current.value = '';
