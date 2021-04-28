@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #97f4c8;
+}
+
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+.people-table {
+  margin: 0 auto;
+  width: 960px;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+}

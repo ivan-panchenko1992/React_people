@@ -1,5 +1,7 @@
-import { request } from './api';
+import request from './request';
 
-const getPeople = () => (request('people/'));
+const SWAPI_URL = 'https://swapi.dev/api/';
+
+const getPeople = () => request(`${SWAPI_URL}people`);
 
 export default getPeople;
