@@ -4,6 +4,7 @@ import React, {
 import './PeopleList.scss';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import { Comments } from '../comments/Comments';
 
 export const PeopleList = ({ name, birth }) => {
   const [comments, setComments] = useState([]);
@@ -64,24 +65,10 @@ export const PeopleList = ({ name, birth }) => {
           />
         </form>
       </div>
-      <div className="comments">
-        <h4>Saved comments:</h4>
-        {comments && comments.map((comment) => (
-          <div
-            className="comments__item"
-            key={comment.id}
-          >
-            <p>{comment.title}</p>
-            <button
-              type="button"
-              className="comments__button"
-              onClick={() => removeHandler(comment.id)}
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
+      <Comments
+        deleteComment={removeHandler}
+        comments={comments}
+      />
     </section>
   );
 };
