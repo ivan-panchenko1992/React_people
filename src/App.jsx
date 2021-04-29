@@ -5,35 +5,47 @@ import 'semantic-ui-css/semantic.min.css';
 import getPeople from './api/people';
 import './App.scss';
 import { PeopleList } from './components/peopleList';
-import LoaderBall from './components/Loader/LoaderBall';
+import Loader from './components/Loader/Loader';
 
 const App = () => {
-  const [people, setPeople] = useState([]);
+  const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPeople().then((allPeople) => {
-      const prepearedPeople = allPeople.map((human) => ({
-        ...human,
-        id: uuidv4(),
-      }));
-      setPeople(prepearedPeople);
-      setLoading(false);
-    });
+    const heroFromLocalStorage = JSON.parse(localStorage.getItem('people'));
+    if (!heroFromLocalStorage) {
+      getPeople().then((allHeroes) => {
+        const prepearedHeroes = allHeroes.map((human) => ({
+          ...human,
+          id: uuidv4(),
+        }));
+        return prepearedHeroes;
+      }).then((heroesWithId) => {
+        setHeroes(heroesWithId);
+        localStorage.setItem('people', JSON.stringify(heroesWithId));
+        setLoading(false);
+      });
+    }
+    setHeroes(heroFromLocalStorage);
+    setLoading(false);
   }, []);
 
   return (
     <div className="App">
-      <h2> people: </h2>
+      <h2> Star Wars heroes: </h2>
 
-      {loading
-        ? <LoaderBall />
+      {loading || !heroes
+        ? <Loader />
         : (
-          <div className="App-table">
-            <ul className="App-table__list">
-              {people.map((human) => (
-                <li className="App-table__item" key={human.id}>
-                  <PeopleList name={human.name} birth={human.birth_year} id={human.id} />
+          <div className="App__table heroes">
+            <ul className="heroes__list">
+              {heroes.map((human) => (
+                <li className="heroes__item" key={human.id}>
+                  <PeopleList
+                    humanId={human.id}
+                    name={human.name}
+                    birth={human.birth_year}
+                  />
                 </li>
               ))}
             </ul>

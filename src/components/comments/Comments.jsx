@@ -4,7 +4,7 @@ import './Comments.scss';
 
 export const Comments = ({ deleteComment, comments }) => (
   <div className="comments">
-    <h4>Saved comments:</h4>
+    <h4>Hero comments:</h4>
     {comments && comments.map((comment) => (
       <div
         className="comments__item"
@@ -30,5 +30,9 @@ Comments.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  ),
+};
+
+Comments.defaultProps = {
+  comments: [],
 };

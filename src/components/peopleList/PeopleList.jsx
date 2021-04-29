@@ -1,14 +1,22 @@
 import React, {
-  useState, useRef,
+  useState, useRef, useEffect,
 } from 'react';
 import './PeopleList.scss';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Comments } from '../comments/Comments';
 
-export const PeopleList = ({ name, birth }) => {
+export const PeopleList = ({ name, birth, humanId }) => {
   const [comments, setComments] = useState([]);
   const commentRef = useRef(null);
+
+  useEffect(() => {
+    const commentBox = JSON.parse(localStorage.getItem(`${humanId}`));
+    if (!commentBox) {
+      return;
+    }
+    setComments(commentBox);
+  }, []);
 
   function submitHandler(event) {
     event.preventDefault();
@@ -24,15 +32,20 @@ export const PeopleList = ({ name, birth }) => {
     };
     commentRef.current.value = '';
 
-    setComments((prevVal) => [
-      ...prevVal,
-      prepearedComment,
-    ]);
+    setComments((prevComments) => {
+      const newComments = [
+        ...prevComments,
+        prepearedComment,
+      ];
+      localStorage.setItem(`${humanId}`, JSON.stringify(newComments));
+      return newComments;
+    });
   }
 
-  function removeHandler(id) {
+  function removeComment(id) {
     setComments((prevComment) => {
       const filteredComments = prevComment.filter((comment) => comment.id !== id);
+      localStorage.setItem(`${humanId}`, JSON.stringify(filteredComments));
       return filteredComments;
     });
   }
@@ -53,7 +66,7 @@ export const PeopleList = ({ name, birth }) => {
         >
           <button
             type="submit"
-            className="button is-small is-success"
+            className="human-info__button button is-small is-success"
           >
             Add Comment
           </button>
@@ -66,7 +79,7 @@ export const PeopleList = ({ name, birth }) => {
         </form>
       </div>
       <Comments
-        deleteComment={removeHandler}
+        deleteComment={removeComment}
         comments={comments}
       />
     </section>
@@ -74,6 +87,7 @@ export const PeopleList = ({ name, birth }) => {
 };
 
 PeopleList.propTypes = {
+  humanId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   birth: PropTypes.string.isRequired,
 };
