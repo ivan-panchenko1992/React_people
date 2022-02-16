@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Comments } from '../comments/Comments';
 
-export const PeopleList = ({ name, birth, humanId }) => {
+const PeopleList = ({ name, birth, humanId }) => {
   const [comments, setComments] = useState([]);
   const commentRef = useRef(null);
 
@@ -91,3 +91,5 @@ PeopleList.propTypes = {
   name: PropTypes.string.isRequired,
   birth: PropTypes.string.isRequired,
 };
+
+export default PeopleList;

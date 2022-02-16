@@ -4,8 +4,8 @@ import 'bulma';
 import 'semantic-ui-css/semantic.min.css';
 import getPeople from './api/people';
 import './App.scss';
-import { PeopleList } from './components/peopleList';
 import Loader from './components/Loader/Loader';
+import PeopleList from './components/peopleList/PeopleList';
 
 const App = () => {
   const [heroes, setHeroes] = useState([]);
