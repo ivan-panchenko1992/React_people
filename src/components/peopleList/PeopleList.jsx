@@ -1,9 +1,9 @@
 import React, {
   useState, useRef, useEffect,
 } from 'react';
+import PropTypes from 'prop-types';
 import './PeopleList.scss';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
 import { Comments } from '../comments/Comments';
 
 const PeopleList = ({ name, birth, humanId }) => {
