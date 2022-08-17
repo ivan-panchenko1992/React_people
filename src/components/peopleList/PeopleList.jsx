@@ -9,7 +9,7 @@ import { Comments } from '../comments/Comments';
 const PeopleList = ({ name, birth, humanId }) => {
   const [comments, setComments] = useState([]);
   const commentRef = useRef(null);
-  fbdsfjdsbmkfnskfnds;lfms;lmsdmfk;s
+
   useEffect(() => {
     const commentBox = JSON.parse(localStorage.getItem(`${humanId}`));
     if (!commentBox) {
